@@ -1,7 +1,7 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/
- */
+import React from 'react';
 
-// You can delete this file if you're not using it
+import { NotificationProvider } from './src/context/AddItemNotificationProvider';
+
+export const wrapRootElement = ({ element }) => (
+  <NotificationProvider>{element}</NotificationProvider>
+);

@@ -1,99 +1,213 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+![Gatsby E-commerce theme designed by Matter](https://user-images.githubusercontent.com/43764894/223762927-2e463570-b09a-4d51-ab81-2e0fa8aa2c70.png)
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+This beautiful theme from the [Matter Design Team](https://matterdesign.com.au/) gives you the styling and scaffolding for your next e-commerce site. You can customize to your heart's content and add the tooling for cart, transactions, product, and more. This theme uses:
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+- [Gatsby](https://www.gatsbyjs.com/)
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [Prettier](https://prettier.io/)
+- [React Helmet](https://github.com/nfl/react-helmet)
 
-## 🚀 Quick start
+Take a look at the screenshot below or preview the live site here: https://gatsby-ecommerce-theme.netlify.app/!
+![full page screenshot](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1653371030/CleanShot_2022-05-24_at_01.11.52_2x_bspa8c.jpg)
 
-1.  **Create a Gatsby site.**
+> 🧐 Please be aware that some aspects of this theme are not fully functional and will need to be integrated with the recommended tooling mentioned at the end of the [README](#next-steps-with-this-theme). 
 
-    Use the Gatsby CLI ([install instructions](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-0/#gatsby-cli)) to create a new site, specifying the default starter.
+## Table of Contents:
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+- [Quick Steps + Deploy Options](#quick-setup--deploy-option)
+  - [Cloning + Installing Packages](#cloning--installing-packages)
+- [Deploying](#deploying)
+- [Project Structure](#project-structure)
+  - [Making Changes to the Hero Component](#making-changes-to-the-hero-component)
+  - [Making Changes to the Header or Footer](#making-content-changes-to-the-header-or-footer)
+- [Testing](#testing)
+  - [Included Default Testing](#included-default-testing)
+  - [Removing Renovate](#removing-renovate)
+  - [Removing Cypress](#removing-cypress)
+- [Next Steps with This Theme](#next-steps-with-this-theme)
 
-1.  **Start developing.**
+## Quick Setup + Deploy Option
 
-    Navigate into your new site’s directory and start it up.
+Click the button below and it will help you create a new repo, create a new Netlify project, and deploy this Theme!
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/gatsby-ecommerce-theme&utm_source=github&utm_medium=matter-design-theme-repo&utm_campaign=template-team)
 
-1.  **Open the source code and start editing!**
+## Regular Setup
 
-    Your site is now running at `http://localhost:8000`!
+ ### Cloning + Installing Packages
+ 
+  - Clone this repo with one of these options:
 
-    Note: You'll also see a second link: `http://localhost:8000/___graphql`. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby Tutorial](https://www.gatsbyjs.com/docs/tutorial/getting-started/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries).
+    - Click the 'Use this template' button at the top of the page
+    - Via the command line:
+       ```shell
+       git clone https://github.com/netlify-templates/gatsby-ecommerce-theme/
+       ```
+    - Or you can clone the theme straight from the Netlify CLI, using the `netlify sites:create-template` command in your terminal ([learn more about this command here](https://www.netlify.com/blog/create-a-site-from-a-template-using-the-netlify-cli)) to do the entire flow for you.
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+  From there, you can install the project's dependencies by running:
 
-## 🚀 Quick start (Netlify)
+  ```shell
+  npm install or yarn install
+  ```
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+  Finally, you can run your project locally with:
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+  ```shell
+  cd gatsby-sydney-ecommerce-theme/
+  npm start or yarn start
+  ```
+  
+  or, run it using the Netlify CLI with:
+  
+  ```shell
+  netlify run dev
+  ```
+  
+  Open your browser and visit <http://localhost:5000>, your project should now be running!
+  
+  ## Deploying
+ 
+  After installing and customizing your new e-commerce theme it's now time to deploy! 
+  
+   -  You can Deploy using the [Netlify CLI](https://cli.netlify.com/):
 
-## 🧐 What's inside?
+      ```bash
+      netlify init # initialize a new Netlify project & deploy
+      ```
 
-A quick look at the top-level files and directories you'll see in a typical Gatsby project.
+   It will use the information from the included Netlify configuration file, [`netlify.toml`](./netlify.toml), to set up the build command as `gatsby build` to create a static project and locate the build project in the `public` directory.
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package.json
-    └── README.md
+   The `init` process will also set up continuous deployment for your project so that a new build will be triggered & deployed when you push code to the repo (you can change this from your project dashboard: Site Settings/Build & deploy/Continuous Deployment).
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+   You can also use `netlify deploy (--prod)` to manually deploy and `netlify open` to open your project dashboard.
 
-1.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+  > 💡 we only have so many keystrokes to give, use `ntl` shorthand for `netlify` or make [an alias of your own](https://www.netlify.com/blog/2020/04/12/speed-up-productivity-with-terminal-aliases/) to save hours...of accumulated milliseconds
 
-1.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+  - You can deploy within the Netlify site by connecting to git, this [video](https://www.youtube.com/watch?v=4h8B080Mv4U&t=107s) will walk you through that process. 
+  - Or, you can use the Deploy to Netlify button which will walk you through the process of spinning up a repo, creating a new project in Netlify, AND deploying it :)
 
-1.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/gatsby-ecommerce-theme&utm_source=github&utm_medium=matter-design-theme-repo&utm_campaign=template-team)
 
-1.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/) for more detail).
+## Project Structure
 
-1.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+Here is a bit of an overview of the directory structure of the project:
 
-1.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+| Directory | Description |
+| :---- | :---- |
+| `src/components/` | Stores reusable elements across the site. (e.g. BlogPreview element) |
+| `src/pages/` | Stores routes for a user to go to based on each `.js` file and nested folder (e.g. `src/pages/about.js` creates a route `/about` in the web app) |
+| `src/helpers` | Stores mock data for the blog or product list and general utility functions. |
 
-1.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
+### Making changes to the Hero component
 
-1.  **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+On the homepage of the website and a few other places, there is a full-width image component. We refer to this as the `<Hero/>` component. Here is a bit of an overview of what its API looks like:
 
-1.  **`README.md`**: A text file containing useful reference information about your project.
+```jsx
+<Hero
+  maxWidth='500px' // how big the image's maxumim should be
+  image={'/banner1.png'} // the source location for the image
+  title={'Essentials for a cold winter'} // the main text displayed
+  subtitle={'Discover Autumn Winter 2021'} // text found below the main text
+  ctaText={'shop now'} // the presented text for a user to click on
+  ctaAction={goToShop} // the location the call-to-action text directs users
+/>
+```
 
-## 🎓 Learning Gatsby
+You can see it in action under [`src/pages/index.js`](./src/pages/index.js) or see the component in [`src/components/Hero/Hero.js`](./src/components/Hero/Hero.js).
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
+### Making content changes to the Header or Footer
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/docs/tutorial/getting-started/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+The project contains a file named `src/config.json`. Inside of this file describes the content of the header links (`headerLinks`) as well as the footer links (`footerLinks`). For the header, each element in the array has a base structure of:
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+```json
+{
+  "menuLabel": "The label that is given to a user",
+  "menuLink": "The URL that this should take a user to"
+}
+```
 
-## 💫 Deploy
+If you want the menu item to have a dropdown, you can also add a `category` key with the value being an array of the categories and their containing elements, here's what the base could look like:
 
-[Build, Deploy, and Host On Netlify](https://netlify.com)
+```json
+{
+  "menuLabel": "The label that is given to a user",
+  "menuLink": "The URL that this should take a user to",
+  "category": [
+    {
+      "categoryLabel": "Label you want the category to have",
+      "submenu": [
+        {
+          "menuLabel": "A label underneath the category",
+          "menuLink": "The associated link to this label"
+        }
+      ]
+    }
+  ]
+}
+```
 
-The fastest way to combine your favorite tools and APIs to build the fastest sites, stores, and apps for the web. And also the best place to build, deploy, and host your Gatsby sites.
+The footer works in a similar way. It assumes each element in the array has a heading and an array of associated links to direct folks to:
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+```json
+"footerLinks": [
+    {
+      "subTitle": "Label of the column in the footer",
+      "links": [
+        {
+          "text": "Text to display to the user",
+          "link": "URL of where to take the user to when clicked"
+        },
+      ]
+    }
+]
+```
+
+## Testing
+
+### Included Default Testing
+
+We’ve included some tooling that helps us maintain these templates. This template currently uses:
+
+- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
+- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
+- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
+
+If your team is not interested in this tooling, you can remove them with ease!
+
+### Removing Renovate
+
+In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
+
+### Removing Cypress
+
+For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
+
+```diff
+[[plugins]]
+  package = "netlify-plugin-cypress"
+-  [plugins.inputs.postBuild]
+-    enable = true
+-
+-  [plugins.inputs]
+-    enable = false
+```
+
+If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
+
+```bash
+npm uninstall -D netlify-plugin-cypress
+```
+
+And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
+
+```bash
+npm uninstall cypress
+```
+
+## Next Steps with this theme
+
+This project is intended to be extended by you! We wanted to make possible to replace parts of it with your own tools and data sources. If you're interested on a direction, you can refer to Matter's [how to use section](https://gatsby-ecommerce-theme.netlify.app/how-to-use/) in this project or you may want to consider using [Matter's toolset with their JAMM framework](https://matterdesign.com.au/service/headless-commerce-with-jamm/) which includes some projects like:
+- [BigCommerce](https://bigcommerce.zfrcsk.net/c/2429593/854992/2941) for a headless e-commerce solution
+- [Builder](https://www.builder.io) as a CMS for the blog articles or other content creation
+- [Klaviyo](https://www.klaviyo.com/) for any email or SMS marketing automation

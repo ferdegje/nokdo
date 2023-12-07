@@ -1,15 +1,47 @@
-import * as React from "react"
+import React, { useState } from 'react';
+import { navigate } from 'gatsby';
+import * as styles from './404.module.css';
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Button from '../components/Button';
+import Container from '../components/Container';
+import FormInputField from '../components/FormInputField/FormInputField';
+import Layout from '../components/Layout';
 
-const NotFoundPage = () => (
-  <Layout>
-    <h1>404: Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-)
+const NotFoundPage = () => {
+  const [search, setSearch] = useState('');
 
-export const Head = () => <Seo title="404: Not Found" />
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search?q=${search}`);
+  };
 
-export default NotFoundPage
+  return (
+    <Layout disablePaddingBottom>
+      <Container size={'medium'}>
+        <div className={styles.root}>
+          <h1>404 Error</h1>
+          <h2>Page not found</h2>
+          <p>
+            Uh oh, looks like the page you are looking for has moved or no
+            longer exists.
+          </p>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className={styles.searchContainer}>
+              <FormInputField
+                id={'name'}
+                value={search}
+                handleChange={(_, e) => setSearch(e)}
+                type={'text'}
+              />
+              <Button type={'submit'} level={'primary'}>
+                search
+              </Button>
+            </div>
+          </form>
+        </div>
+      </Container>
+    </Layout>
+  );
+};
+
+export default NotFoundPage;

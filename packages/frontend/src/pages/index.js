@@ -21,7 +21,7 @@ const IndexPage = () => {
   const blogData = generateMockBlogData(3);
 
   const goToShop = () => {
-    navigate('/shop');
+    navigate('/signup');
   };
 
   return (
@@ -30,9 +30,9 @@ const IndexPage = () => {
       <Hero
         maxWidth={'500px'}
         image={'/banner1.png'}
-        title={'Essentials for a cold winter'}
-        subtitle={'Discover Autumn Winter 2021'}
-        ctaText={'shop now'}
+        title={'Bienvenue dans vos cadeaux'}
+        subtitle={'Gestion des cadeaux pour toute la famille'}
+        ctaText={'Creer mon compte'}
         ctaAction={goToShop}
       />
 

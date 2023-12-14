@@ -66,7 +66,10 @@ const SignupPage = (props) => {
       setErrorForm(errorState);
       navigate('/accountSuccess');
       window.localStorage.setItem('key', 'sampleToken');
-      //create account endpoint
+      fetch(process.env.REACT_APP_API_URL, {
+        method: "POST",
+      })
+      .then((response) => response.text())
     } else {
       setErrorForm(tempError);
     }

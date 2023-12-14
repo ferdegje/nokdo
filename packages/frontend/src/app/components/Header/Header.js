@@ -34,6 +34,11 @@ const Header = (prop) => {
     'Candles Cinnamon',
   ];
 
+  const inlineStyle = {
+    display: "flex",
+    height: "1px"
+  };
+
   const handleHover = (navObject) => {
     if (navObject.category) {
       setShowMenu(true);
@@ -89,6 +94,7 @@ const Header = (prop) => {
           <div className={styles.linkContainer}>
             <nav
               role={'presentation'}
+              style={inlineStyle}
               onMouseLeave={() => {
                 setShowMenu(false);
               }}

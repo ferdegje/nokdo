@@ -12,12 +12,13 @@ import About from '../app/pages/about'
 import AccountFavorites from '../app/pages/account/favorites'
 import Login from '../app/pages/login'
 import Cart from '../app/pages/cart'
+import PrivateRoute from "../components/privateRoute"
 
 const App = () => (
 
     <Router>
     <IndexPage path='/' />
-    <ShopPage path='/shop' />
+    <PrivateRoute path='/shop' component={ShopPage}/>
     <SignupPage path='/signup' />
     <ProductSample path='/product/sample' />
     <Blog path='/blog' />

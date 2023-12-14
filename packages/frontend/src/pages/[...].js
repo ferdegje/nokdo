@@ -6,6 +6,12 @@ import IndexPage from '../app/pages/index'
 import ShopPage from '../app/pages/shop'
 import SignupPage from '../app/pages/signup'
 import ProductSample from '../app/pages/product/sample'
+import Blog from '../app/pages/blog'
+import BlogSample from '../app/pages/blog/sample'
+import About from '../app/pages/about'
+import AccountFavorites from '../app/pages/account/favorites'
+import Login from '../app/pages/login'
+import Cart from '../app/pages/cart'
 
 const App = () => (
 
@@ -14,6 +20,12 @@ const App = () => (
     <ShopPage path='/shop' />
     <SignupPage path='/signup' />
     <ProductSample path='/product/sample' />
+    <Blog path='/blog' />
+    <BlogSample path='/blog/sample' />
+    <About path='/about' />
+    <AccountFavorites path='/account/favorites' />
+    <Login path='/login' />
+    <Cart path='/cart' />
     </Router>
 )
 

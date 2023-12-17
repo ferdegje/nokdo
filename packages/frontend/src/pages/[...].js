@@ -1,7 +1,6 @@
 import React from "react"
 import { Router, Link, Location } from "@reach/router"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
-import "./main.css"
 import IndexPage from '../app/pages/index'
 import ShopPage from '../app/pages/shop'
 import SignupPage from '../app/pages/signup'

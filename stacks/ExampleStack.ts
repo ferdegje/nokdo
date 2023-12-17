@@ -37,12 +37,13 @@ export function ExampleStack({ stack }: StackContext) {
   auth.attachPermissionsForAuthUsers(stack, [api]);
 
   // Deploy our React app
-  const site = new StaticSite(stack, "ReactSite", {
+  const site = new StaticSite(stack, "GatsbySite", {
     path: "packages/frontend",
     buildCommand: "npm run build",
-    buildOutput: "build",
+    buildOutput: "public",
+    errorPage: "redirect_to_index_page",
     environment: {
-      REACT_APP_API_URL: api.url,
+      GATSBY_APP_API_URL: api.url,
     },
   });
 

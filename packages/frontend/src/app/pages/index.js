@@ -39,7 +39,7 @@ const IndexPage = () => {
       {/* Message Container */}
       <div className={styles.messageContainer}>
         <p>
-          This is a demonstration of the Sydney theme for verse by{' '}
+          This is a good {process.env.GATSBY_APP_API_URL} demonstration of the Sydney theme for verse by{' '}
           <span className={styles.gold}>matter design.</span>
         </p>
         <p>

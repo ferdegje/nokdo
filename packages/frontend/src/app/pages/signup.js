@@ -64,12 +64,40 @@ const SignupPage = (props) => {
 
     if (validForm === true) {
       setErrorForm(errorState);
-      navigate('/accountSuccess');
       window.localStorage.setItem('key', 'sampleToken');
-      fetch(process.env.REACT_APP_API_URL, {
+      const data = {
+        firstName: signupForm.firstName,
+        lastName: signupForm.lastName,
+        email: signupForm.email,
+        password: signupForm.password
+      };
+      fetch(process.env.GATSBY_APP_API_URL+"/user", {
         method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
       })
-      .then((response) => response.text())
+      .then((response) => {
+        const resp = response.json();
+        if (response.ok) {
+          console.log("Signup call was successful");
+          // navigate('/accountSuccess');
+        } else {
+          resp.then(msg => {
+            tempError.submit=msg.message;
+            setErrorForm(tempError);
+          })
+          
+        }
+        
+        
+        
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     } else {
       setErrorForm(tempError);
     }
@@ -123,7 +151,7 @@ const SignupPage = (props) => {
               labelName={'Password'}
               error={errorForm.password}
             />
-
+            <span className={styles.alert}>{errorForm.submit}</span>
             <Button fullWidth type={'submit'} level={'primary'}>
               create account
             </Button>

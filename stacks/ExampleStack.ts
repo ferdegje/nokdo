@@ -9,6 +9,11 @@ export function ExampleStack({ stack }: StackContext) {
     primaryIndex: { partitionKey: "counter" },
   });
 
+  // Create auth provider
+  const auth = new Cognito(stack, "Auth", {
+    login: ["email"],
+  });
+
   // Create the HTTP API
   const api = new Api(stack, "Api", {
     defaults: {
@@ -16,10 +21,19 @@ export function ExampleStack({ stack }: StackContext) {
       function: {
         // Bind the table name to our API
         bind: [table],
+        environment: {
+          UserPoolId: auth.userPoolId,
+          IdentityPoolId: auth.cognitoIdentityPoolId,
+          UserPoolClientId: auth.userPoolClientId,
+        }
       },
     },
     routes: {
       "POST /": "packages/functions/src/lambda.handler",
+      "POST /user": {
+        function: "packages/functions/src/user.main",
+        authorizer: "none",
+      },
       "GET /private": "packages/functions/src/private.main",
       "GET /public": {
         function: "packages/functions/src/public.main",
@@ -28,10 +42,7 @@ export function ExampleStack({ stack }: StackContext) {
     },
   });
 
-  // Create auth provider
-  const auth = new Cognito(stack, "Auth", {
-    login: ["email"],
-  });
+  
 
   // Allow authenticated users invoke API
   auth.attachPermissionsForAuthUsers(stack, [api]);
@@ -42,6 +53,7 @@ export function ExampleStack({ stack }: StackContext) {
     buildCommand: "npm run build",
     buildOutput: "public",
     errorPage: "redirect_to_index_page",
+    customDomain: stack.stage === "prod" ? "nokdo.org" : `${stack.stage}.nokdo.org`,
     environment: {
       GATSBY_APP_API_URL: api.url,
     },
@@ -49,7 +61,7 @@ export function ExampleStack({ stack }: StackContext) {
 
   // Show the URLs in the output
   stack.addOutputs({
-    SiteUrl: site.url,
+    SiteUrl: site.customDomainUrl,
     ApiEndpoint: api.url,
     UserPoolId: auth.userPoolId,
     IdentityPoolId: auth.cognitoIdentityPoolId,

@@ -7,9 +7,12 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "@types/node": "^20.10.3",
     "@types/aws-lambda": "^8.10.130",
-    "vitest": "^1.0.1",
-    "sst": "^2.37.0"
+    "@types/node": "^20.10.3",
+    "sst": "^2.37.0",
+    "vitest": "^1.0.1"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^6.3.7"
   }
 }

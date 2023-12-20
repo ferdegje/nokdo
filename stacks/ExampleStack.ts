@@ -10,8 +10,8 @@ export function ExampleStack({ stack }: StackContext) {
   });
 
   // Create auth provider
-  const auth = new Cognito(stack, "Auth", {
-    login: ["email"],
+  const authByPhone = new Cognito(stack, "AuthByPhone", {
+    login: ["phone"],
   });
 
   // Create the HTTP API
@@ -22,9 +22,9 @@ export function ExampleStack({ stack }: StackContext) {
         // Bind the table name to our API
         bind: [table],
         environment: {
-          UserPoolId: auth.userPoolId,
-          IdentityPoolId: auth.cognitoIdentityPoolId,
-          UserPoolClientId: auth.userPoolClientId,
+          UserPoolId: authByPhone.userPoolId,
+          IdentityPoolId: authByPhone.cognitoIdentityPoolId,
+          UserPoolClientId: authByPhone.userPoolClientId,
         }
       },
     },
@@ -45,7 +45,7 @@ export function ExampleStack({ stack }: StackContext) {
   
 
   // Allow authenticated users invoke API
-  auth.attachPermissionsForAuthUsers(stack, [api]);
+  authByPhone.attachPermissionsForAuthUsers(stack, [api]);
 
   // Deploy our React app
   const site = new StaticSite(stack, "GatsbySite", {
@@ -63,8 +63,8 @@ export function ExampleStack({ stack }: StackContext) {
   stack.addOutputs({
     SiteUrl: site.customDomainUrl,
     ApiEndpoint: api.url,
-    UserPoolId: auth.userPoolId,
-    IdentityPoolId: auth.cognitoIdentityPoolId,
-    UserPoolClientId: auth.userPoolClientId,
+    UserPoolId: authByPhone.userPoolId,
+    IdentityPoolId: authByPhone.cognitoIdentityPoolId,
+    UserPoolClientId: authByPhone.userPoolClientId,
   });
 }

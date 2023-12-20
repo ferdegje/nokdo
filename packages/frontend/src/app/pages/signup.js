@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { navigate } from 'gatsby';
 import {
-  validateEmail,
+  validatePhone,
   validateStrongPassword,
   isEmpty,
 } from '../helpers/general';
@@ -11,19 +11,22 @@ import AttributeGrid from '../components/AttributeGrid/AttributeGrid';
 import Layout from '../components/Layout/Layout';
 import FormInputField from '../components/FormInputField/FormInputField';
 import Button from '../components/Button';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+import flags from 'react-phone-number-input/flags'
 
 const SignupPage = (props) => {
   const initialState = {
     firstName: '',
     lastName: '',
-    email: '',
+    phone: '',
     password: '',
   };
 
   const errorState = {
     firstName: '',
     lastName: '',
-    email: '',
+    phone: '',
     password: '',
   };
 
@@ -37,6 +40,7 @@ const SignupPage = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    window.localStorage.setItem('phone', signupForm.phone);
     let validForm = true;
     const tempError = { ...errorState };
 
@@ -50,9 +54,9 @@ const SignupPage = (props) => {
       validForm = false;
     }
 
-    if (validateEmail(signupForm.email) !== true) {
-      tempError.email =
-        'Please use a valid email address, such as user@example.com.';
+    if (validatePhone(signupForm.phone) !== true) {
+      tempError.phone =
+        'Please use a valid phone number, such as +33614221744.';
       validForm = false;
     }
 
@@ -64,11 +68,11 @@ const SignupPage = (props) => {
 
     if (validForm === true) {
       setErrorForm(errorState);
-      window.localStorage.setItem('key', 'sampleToken');
+      
       const data = {
         firstName: signupForm.firstName,
         lastName: signupForm.lastName,
-        email: signupForm.email,
+        phone: signupForm.phone,
         password: signupForm.password
       };
       fetch(process.env.GATSBY_APP_API_URL+"/user", {
@@ -83,7 +87,7 @@ const SignupPage = (props) => {
         const resp = response.json();
         if (response.ok) {
           console.log("Signup call was successful");
-          // navigate('/accountSuccess');
+          navigate('/accountSuccess');
         } else {
           resp.then(msg => {
             tempError.submit=msg.message;
@@ -133,15 +137,13 @@ const SignupPage = (props) => {
               labelName={'Last Name'}
               error={errorForm.lastName}
             />
-
-            <FormInputField
-              id={'email'}
-              value={signupForm.email}
-              handleChange={(id, e) => handleChange(id, e)}
-              type={'email'}
-              labelName={'Email'}
-              error={errorForm.email}
+            <PhoneInput
+              flags={flags}
+              placeholder="Enter phone number"
+              value={signupForm.phone}
+              onChange={(v) => signupForm.phone=v}
             />
+            <span className={styles.alert}>{errorForm.phone}</span>
 
             <FormInputField
               id={'password'}

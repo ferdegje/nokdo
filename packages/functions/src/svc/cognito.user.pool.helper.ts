@@ -16,16 +16,16 @@ class CognitoUserPoolHelper {
     });
   }
 
-  public signUp({ email, password }: { email: string, password: string }): Promise<string> {
+  public signUp({ phone, password }: { phone: string, password: string }): Promise<string> {
     return new Promise((resolve, reject) => {
       const attributeList: CognitoUserAttribute[] = [
         new CognitoUserAttribute({
-          Name: 'email',
-          Value: email,
+          Name: 'phone_number',
+          Value: phone,
         }),
       ];
 
-      this.userPool.signUp(email, password, attributeList, [], (err, result) => {
+      this.userPool.signUp(phone, password, attributeList, [], (err, result) => {
         if (err) {
           return reject(err);
         }
@@ -35,10 +35,10 @@ class CognitoUserPoolHelper {
     });
   }
 
-  public confirmSignUp({ email, code }: { email: string, code: string }): Promise<string> {
+  public confirmSignUp({ phone, code }: { phone: string, code: string }): Promise<string> {
     return new Promise((resolve, reject) => {
       const cognitoUser = new CognitoUser({
-        Username: email,
+        Username: phone,
         Pool: this.userPool,
       });
 

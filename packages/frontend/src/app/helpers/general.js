@@ -1,3 +1,5 @@
+import { isValidPhoneNumber } from 'react-phone-number-input'
+
 /**
  * Is value numeric
  * 
@@ -30,6 +32,21 @@ function isNumeric(str) {
  */
 function validateEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/**
+ * Validate phone format
+ * 
+ * Checks the provided phone and validates its format
+ * 
+ * @param   {String} phone  The provided phone
+ * 
+    import { validatePhone } from '../helpers/general'
+
+    validatePhone(email)
+ */
+function validatePhone(phone) {
+  return isValidPhoneNumber(phone);
 }
 
 /**
@@ -79,4 +96,4 @@ function isAuth() {
   }
 }
 
-export { isNumeric, validateEmail, validateStrongPassword, isEmpty, isAuth };
+export { isNumeric, validateEmail, validatePhone, validateStrongPassword, isEmpty, isAuth };

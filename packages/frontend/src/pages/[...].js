@@ -11,6 +11,8 @@ import About from '../app/pages/about'
 import AccountFavorites from '../app/pages/account/favorites'
 import Login from '../app/pages/login'
 import Cart from '../app/pages/cart'
+import AccountSuccess from "../app/pages/accountSuccess"
+
 import PrivateRoute from "../components/privateRoute"
 
 const App = () => (
@@ -26,6 +28,7 @@ const App = () => (
     <AccountFavorites path='/account/favorites' />
     <Login path='/login' />
     <Cart path='/cart' />
+    <AccountSuccess path='/accountSuccess' />
     </Router>
 )
 

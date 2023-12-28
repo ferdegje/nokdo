@@ -87,6 +87,8 @@ const SignupPage = (props) => {
         const resp = response.json();
         if (response.ok) {
           console.log("Signup call was successful");
+          window.localStorage.setItem("username", signupForm.phone);
+          window.localStorage.setItem("password", signupForm.password);
           navigate('/accountSuccess');
         } else {
           resp.then(msg => {

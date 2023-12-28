@@ -3,7 +3,6 @@ import { navigate } from 'gatsby';
 
 import * as styles from './accountSuccess.module.css';
 
-import ActionCard from '../components/ActionCard';
 import Container from '../components/Container';
 import Layout from '../components/Layout/Layout';
 import ReactCodeInput from 'react-code-input';
@@ -46,7 +45,36 @@ const AccountSuccessPage = (props) => {
       const resp = response.json();
       if (response.ok) {
         setErrorForm({...errorForm, submit: "Le code a ete valide"})
-        navigate('/shop');
+        
+        const loginData = {
+          username: window.localStorage.getItem("username"),
+          password: window.localStorage.getItem("password")
+        };
+        window.localStorage.setItem("username", "");
+        window.localStorage.setItem("password", "");
+        fetch(process.env.GATSBY_APP_API_URL+"/user/login", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(loginData),
+        })
+        .then((response) => {
+          const resp = response.json();
+          if (response.ok) {
+            setErrorForm({...errorForm, submit: "Vos identifiants ont ete valides."})
+            resp.then(msg => {
+              window.localStorage.setItem("gatsbyUser", JSON.stringify(msg))
+              navigate('/shop');
+            })
+          } else {
+            resp.then(msg => {
+              setErrorForm({...errorForm, submit: msg.message});
+            })
+            
+          }
+        })
       } else {
         resp.then(msg => {
           setErrorForm({...errorForm, submit: msg.message});
@@ -71,7 +99,6 @@ const AccountSuccessPage = (props) => {
           </p>
           <form
             noValidate
-            className={styles.signupForm}
             onSubmit={(e) => handleSubmit(e)}
           >
           <div>

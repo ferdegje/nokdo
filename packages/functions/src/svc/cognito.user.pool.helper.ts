@@ -53,16 +53,16 @@ class CognitoUserPoolHelper {
   }
 
   public signIn(
-    { email, password }: { email: string, password: string },
+    { username, password }: { username: string, password: string },
   ): Promise<IUserToken | { userConfirmationNecessary: boolean }> {
     return new Promise((resolve, reject) => {
       const cognitoUser = new CognitoUser({
-        Username: email,
+        Username: username,
         Pool: this.userPool,
       });
 
       const authenticationDetails = new AuthenticationDetails({
-        Username: email,
+        Username: username,
         Password: password,
       });
       cognitoUser.authenticateUser(authenticationDetails, {

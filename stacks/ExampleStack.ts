@@ -34,6 +34,10 @@ export function ExampleStack({ stack }: StackContext) {
         function: "packages/functions/src/user.main",
         authorizer: "none",
       },
+      "POST /user/login": {
+        function: "packages/functions/src/userLogin.main",
+        authorizer: "none",
+      },
       "GET /private": "packages/functions/src/private.main",
       "GET /public": {
         function: "packages/functions/src/public.main",

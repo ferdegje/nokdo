@@ -9,13 +9,7 @@ const setUser = user =>
   window.localStorage.setItem("gatsbyUser", JSON.stringify(user))
 
 export const handleLogin = ({ username, password }) => {
-  if (username === `john` && password === `pass`) {
-    return setUser({
-      username: `john`,
-      name: `Johnny`,
-      email: `johnny@example.org`,
-    })
-  }
+  alert("Deprecated method handleLogin")
 
   return false
 }
@@ -23,7 +17,7 @@ export const handleLogin = ({ username, password }) => {
 export const isLoggedIn = () => {
   const user = getUser()
 
-  return !!user.username
+  return !!user.accessToken
 }
 
 export const logout = callback => {

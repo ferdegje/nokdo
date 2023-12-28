@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Link, navigate } from 'gatsby';
-import { validateEmail, isEmpty } from '../helpers/general';
+import { validatePhone, isEmpty } from '../helpers/general';
 import * as styles from './login.module.css';
 
 import AttributeGrid from '../components/AttributeGrid/AttributeGrid';
 import Layout from '../components/Layout/Layout';
 import FormInputField from '../components/FormInputField/FormInputField';
 import Button from '../components/Button';
+import PhoneInput from 'react-phone-number-input'
+import flags from 'react-phone-number-input/flags'
 
 const LoginPage = (props) => {
+  window.localStorage.setItem("gatsbyUser", JSON.stringify({}))
+
   const initialState = {
     email: '',
     password: '',
@@ -33,12 +37,10 @@ const LoginPage = (props) => {
     let validForm = true;
     const tempError = { ...errorForm };
 
-    if (validateEmail(loginForm.email) !== true) {
-      tempError.email =
-        'Please use a valid email address, such as user@example.com.';
+    if (validatePhone(loginForm.phone) !== true) {
+      tempError.phone =
+        'Please use a valid phone number, such as +33614221744.';
       validForm = false;
-    } else {
-      tempError.email = '';
     }
 
     if (isEmpty(loginForm.password) === true) {
@@ -50,17 +52,49 @@ const LoginPage = (props) => {
 
     if (validForm === true) {
       setErrorForm(errorState);
-
+      const data = {
+        username: loginForm.phone,
+        password: loginForm.password
+      };
+      fetch(process.env.GATSBY_APP_API_URL+"/user/login", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+      })
+      .then((response) => {
+        const resp = response.json();
+        if (response.ok) {
+          setErrorForm({...errorForm, submit: "Vos identifiants ont ete valides."})
+          resp.then(msg => {
+            window.localStorage.setItem("gatsbyUser", JSON.stringify(msg))
+            navigate('/shop');
+          })
+        } else {
+          resp.then(msg => {
+            setErrorForm({...errorForm, submit: msg.message});
+          })
+          
+        }
+        
+        
+        
+      })
+      .catch((error) => {
+        console.log(error)
+      })
       //mock login
-      if (loginForm.email !== 'error@example.com') {
-        navigate('/account');
-        window.localStorage.setItem('key', 'sampleToken');
-      } else {
-        window.scrollTo(0, 0);
-        setErrorMessage(
-          'There is no such account associated with this email address'
-        );
-      }
+      // if (loginForm.email !== 'error@example.com') {
+      //   navigate('/account');
+      //   window.localStorage.setItem('key', 'sampleToken');
+      // } else {
+      //   window.scrollTo(0, 0);
+      //   setErrorMessage(
+      //     'There is no such account associated with this email address'
+      //   );
+      // }
     } else {
       setErrorMessage('');
       setErrorForm(tempError);
@@ -79,23 +113,22 @@ const LoginPage = (props) => {
 
       <div className={styles.root}>
         <div className={styles.loginFormContainer}>
-          <h1 className={styles.loginTitle}>Login</h1>
+          <h1 className={styles.loginTitle}>Identification</h1>
           <span className={styles.subtitle}>
-            Please enter your e-mail and password
+            Merci d'entrer votre telephone et mot de passe.
           </span>
           <form
             noValidate
             className={styles.loginForm}
             onSubmit={(e) => handleSubmit(e)}
           >
-            <FormInputField
-              id={'email'}
-              value={loginForm.email}
-              handleChange={(id, e) => handleChange(id, e)}
-              type={'email'}
-              labelName={'Email'}
-              error={errorForm.email}
+            <PhoneInput
+              flags={flags}
+              placeholder="Enter phone number"
+              value={loginForm.phone}
+              onChange={(v) => loginForm.phone=v}
             />
+            <span className={styles.alert}>{errorForm.phone}</span>
 
             <FormInputField
               id={'password'}
@@ -110,7 +143,7 @@ const LoginPage = (props) => {
                 Forgot Password
               </Link>
             </div>
-
+            <span className={styles.alert}>{errorForm.submit}</span>
             <Button fullWidth type={'submit'} level={'primary'}>
               LOG IN
             </Button>

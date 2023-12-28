@@ -23,6 +23,16 @@
     margin-top: 72px;
 }
 
+.alert {
+    display: block;
+    margin: 48px 0px 16px 0px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: red;
+}
+
 .loginForm > div:first-child {
     margin-bottom: 40px;
 }
